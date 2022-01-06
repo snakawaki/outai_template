@@ -142,7 +142,6 @@ outai_template.prototype = {
 	// 使い回し用関数群
 	commonFunc: {
 		// addListener: function(elm, ev, listener) {
-		// 	console.log(elm.addEventListener);
 		// 	if (elm.addEventListener) {
 		// 		elm.addEventListener(ev, listener, false);
 		// 	} else if (elm.attachEvent) {
@@ -1106,7 +1105,7 @@ outai_template.prototype = {
 		{
 			var inb_info_radio = document.querySelectorAll('#hearing inmput[name=inbound_info]');
 			for (var i = 0; i < inb_info_radio.length; i++) {
-				self.commonFunc.addEventListener('change', inb_info_radio[i], button_fn);
+				self.addEventListener('change', inb_info_radio[i], button_fn);
 			}
 		}
 
@@ -1120,7 +1119,7 @@ outai_template.prototype = {
 				}
 			};
 			for (var i = 0, len = inputsAll.length; i < len; i++) {
-				self.commonFunc.addEventListener('keydown', inputsAll[i], escEsc);
+				self.addEventListener('keydown', inputsAll[i], escEsc);
 			}
 		}
 
@@ -1164,7 +1163,7 @@ outai_template.prototype = {
 				return self.indexOf(x) === i;
 			});
 			for (var i = 0; i < radioToggleDis.length; i++) {
-				self.commonFunc.addEventListener('change', radioToggleDis[i], toggleDisable);
+				self.addEventListener('change', radioToggleDis[i], toggleDisable);
 			}
 		}
 		
@@ -1173,7 +1172,7 @@ outai_template.prototype = {
 			var chkToggleDis = document.querySelectorAll('input[type="checkbox"][data-disable-toggle]');
 			chkToggleDis = [].slice.call(chkToggleDis);
 			for (var i = 0; i < chkToggleDis.length; i++) {
-				self.commonFunc.addEventListener('change', chkToggleDis[i], toggleDisable);
+				self.addEventListener('change', chkToggleDis[i], toggleDisable);
 			}
 		}
 
@@ -1191,7 +1190,7 @@ outai_template.prototype = {
 			var selectToggle = document.querySelectorAll('select[data-toggle-target]');
 			selectToggle = [].slice.call(selectToggle);
 			for (var i = 0; i < selectToggle.length; i++) {
-				self.commonFunc.addEventListener('change', selectToggle[i], selToggleDis);
+				self.addEventListener('change', selectToggle[i], selToggleDis);
 			}
 		}
 
@@ -1211,16 +1210,16 @@ outai_template.prototype = {
 		// メニュー項目（#drawer .list-group-item）
 		var menuLists = document.querySelectorAll('#drawer .list-group-item');
 		for (var i = 0; i < menuLists.length; i++) {
-			self.commonFunc.addEventListener('click', menuLists[i], menu_fn);
+			self.addEventListener('click', menuLists[i], menu_fn);
 		}
 
 		// clickListener for button
 		var btns = document.getElementsByTagName('button');
 		for (var i = 0; i < btns.length; i++) {
-			self.commonFunc.addEventListener('click', btns[i], button_fn);
+			self.addEventListener('click', btns[i], button_fn);
 		}
 		// #gray_back
-		self.commonFunc.addEventListener('click', document.getElementById('gray_back'), button_fn);
+		self.addEventListener('click', document.getElementById('gray_back'), button_fn);
 
 		/**
 		 * 本人確認モーダルを「決定」押下せず、モーダル背景クリックで閉じた場合。
@@ -1234,7 +1233,7 @@ outai_template.prototype = {
 		/* honkaku_inputs */ {
 			var inputEls = document.querySelectorAll('#honkaku input');
 			for (var i = 0; i < inputEls.length; i++) {
-				self.commonFunc.addEventListener(
+				self.addEventListener(
 					inputEls[i],
 					'change',
 					function() {
@@ -1249,10 +1248,10 @@ outai_template.prototype = {
 		{
 			var inputs = document.querySelectorAll('input[type=text], textarea');
 			for (var i = 0; i < inputs.length; i++) {
-				self.commonFunc.addEventListener('focus', inputs[i], function() {
+				self.addEventListener('focus', inputs[i], function() {
 					this.classList.add('focus');
 				});
-				self.commonFunc.addEventListener('blur', inputs[i], function() {
+				self.addEventListener('blur', inputs[i], function() {
 					this.classList.remove('focus');
 				});
 			}
@@ -1269,7 +1268,7 @@ outai_template.prototype = {
 				$memoCounter.classList.remove('red');
 			}
 		};
-		self.commonFunc.addEventListener('input', self.el.$inb_memo, countMemo);
+		self.addEventListener('input', self.el.$inb_memo, countMemo);
 
 		// #memo collapseで受付メモtextarea add/remove class
 		$('#memo_title').on('click', function() {
@@ -1302,7 +1301,7 @@ outai_template.prototype = {
 				$memo_resize.classList.remove('glyphicon-resize-small');
 				$memo_resize.dataset.originalTitle = '受付メモ最大化';
 			};
-			self.commonFunc.addEventListener('click', $memo_resize, function() {
+			self.addEventListener('click', $memo_resize, function() {
 				var hasResizeFull = this.classList.contains('glyphicon-resize-full');
 				hasResizeFull ? memo_fullsize() : memo_neutral();
 				self.commonFunc.changeHearingH();
@@ -1317,7 +1316,7 @@ outai_template.prototype = {
 				return self.indexOf(x) === i;
 			});
 			for (var i = 0; i < toggleRadios.length; i++) {
-				self.commonFunc.addEventListener('change', toggleRadios[i], function() {
+				self.addEventListener('change', toggleRadios[i], function() {
 					var common_name = this.name;
 					var target = this.dataset.targetName;
 					// [name^={common_name}_]の要素を抽出(trやtd内ブロック単位)
@@ -1359,7 +1358,7 @@ outai_template.prototype = {
 			})(),
 			event: function() {
 				for (var i = 0; i < this.targetEls.length; i++) {
-					self.commonFunc.addEventListener('change', this.targetEls[i], function() {
+					self.addEventListener('change', this.targetEls[i], function() {
 						var common_name = this.name;
 						var target = common_name + '_' + this.selectedIndex;
 						// [name^={common_name}_]の要素を抽出（trやtd内ブロック単位）
@@ -2285,7 +2284,7 @@ outai_template.prototype = {
 			var zipButtons = document.getElementsByName('zip');
 
 			for (var i = 0, len = zipButtons.length; i < len; i++) {
-				self.commonFunc.addEventListener('click', zipButtons[i], function() {
+				self.addEventListener('click', zipButtons[i], function() {
 					var prevInput = this.parentNode.previousElementSibling;
 					var zipCode = { code: prevInput.value.replace(/-/g, '') };
 					var kana_group = this.parentNode.parentNode.nextElementSibling.nextElementSibling;
