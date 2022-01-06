@@ -79,7 +79,7 @@
 					"parts": [
 						{
 							"type": "checkbox-toggle-dis",
-							"label": "",
+							"label": "名義/フリガナ",
 							"addon": {
 								"type": "text",
 								"attr": {
@@ -94,10 +94,67 @@
 		},
 		"#kaiyaku": {
 			"header": {
-
+				"text": "契約情報変更"
 			},
 			"contents": [
-
+				{
+					"title": "変更タイプ",
+					"parts": [
+						{
+							"type": "radio-block",
+							"label": "契約者情報 変更",
+							"key": "【契約者情報変更 対応依頼】",
+							"input_attr": {
+								"name": "kaiyaku_type"
+							},
+							"target": "change"
+						},
+						{
+							"type": "radio-block",
+							"label": "誤登録による修正",
+							"key": "【誤登録による修正依頼】",
+							"input_attr": {
+								"name": "kaiyaku_type"
+							},
+							"target": "fix"
+						}
+					]
+				},
+				{
+					"title": "お客さま番号",
+					"visible": false,
+					"attr": {
+						"name": "kaiyaku_type_common"
+					},
+					"parts": [
+						{
+							"type": "input-text",
+							"input_attr": {
+								"style": "-ms-ime-mode: inactive;"
+							}
+						}
+					]
+				},
+				{
+					"title": "変更区分<br /><span class=\"red\">新情報を入力</span>",
+					"visible": false,
+					"attr": {
+						"name": "kaiyaku_type_change"
+					},
+					"parts": [
+						{
+							"type": "checkbox-toggle-dis",
+							"label": "名義/フリガナ",
+							"addon": {
+								"type": "text",
+								"attr": {
+									"style": "-ms-ime-mode: active;",
+									"placeholder": "新情報を入力..."
+								}
+							}
+						}
+					]
+				}
 			]
 		}
 	}
