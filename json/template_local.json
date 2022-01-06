@@ -36,13 +36,37 @@
 					"title": "変更タイプ",
 					"parts": [
 						{
-							"type": "",
-							"label": "",
-							"key": "",
+							"type": "radio-block",
+							"label": "契約者情報 変更",
+							"key": "【契約者情報変更 対応依頼】",
 							"input_attr": {
 								"name": "keihen_type"
 							},
 							"target": "change"
+						},
+						{
+							"type": "radio-block",
+							"label": "誤登録による修正",
+							"key": "【誤登録による修正依頼】",
+							"input_attr": {
+								"name": "keihen_type"
+							},
+							"target": "fix"
+						}
+					]
+				},
+				{
+					"title": "お客さま番号",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_common"
+					},
+					"parts": [
+						{
+							"type": "input-text",
+							"input_attr": {
+								"style": "-ms-ime-mode: inactive;"
+							}
 						}
 					]
 				}
