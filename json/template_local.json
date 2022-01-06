@@ -1,0 +1,52 @@
+{
+	"menu": {
+		"契約情報変更": "#keihen",
+		"解約": "#kaiyaku",
+		"申込キャンセル": "#cancel"
+	},
+	"honkaku": {
+		"parts01": [
+			{ "label": "契約者名", "value": "契約者名", "points": 50},
+			{ "label": "請求者名", "value": "請求者名", "points": 50}
+		],
+		"parts02": [
+			{ "label": "請求コード", "value": "請求コード", "points": 50},
+			{ "label": "契約コード", "value": "契約コード", "points": 50},
+			{ "label": "ログインID", "value": "ログインID", "points": 50},
+			{ "label": "受付番号", "value": "受付番号", "points": 50}
+		],
+		"parts03": [
+			{ "label": "契約電話番号", "value": "契約電話番号", "points": 25},
+			{ "label": "サポートID", "value": "サポートID", "points": 25},
+			{ "label": "請求先電話番号", "value": "請求先電話番号", "points": 25},
+			{ "label": "問合せコード", "value": "問合せコード", "points": 25}
+		],
+		"parts04": [
+			{ "label": "契約先住所", "value": "契約先住所", "points": 25},
+			{ "label": "請求先住所", "value": "請求先住所", "points": 25}
+		]
+	},
+	"templates": {
+		"#keihen": {
+			"header": {
+				"text": "契約情報変更"
+			},
+			"contents": [
+				{
+					"title": "変更タイプ",
+					"parts": [
+						{
+							"type": "",
+							"label": "",
+							"key": "",
+							"input_attr": {
+								"name": "keihen_type"
+							},
+							"target": "change"
+						}
+					]
+				}
+			]
+		}
+	}
+}
