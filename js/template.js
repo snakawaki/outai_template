@@ -142,9 +142,9 @@ outai_template.prototype = {
 	// 使い回し用関数群
 	commonFunc: {
 		addListener: function(elm, ev, listener) {
-			if (!!elm.addEventListener) {
+			/*if (!!elm.addEventListener) {
 				elm.addEventListener(ev, listener, false);
-			} else if (elm.attachEvent) {
+			} else */ if (elm.attachEvent) {
 				elm.attachEvent('on' + ev, listener);
 			} else {
 				throw new Error('イベントリスナーに未対応です');
