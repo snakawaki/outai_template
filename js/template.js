@@ -1105,7 +1105,7 @@ outai_template.prototype = {
 		{
 			var inb_info_radio = document.querySelectorAll('#hearing inmput[name=inbound_info]');
 			for (var i = 0; i < inb_info_radio.length; i++) {
-				self.addEventListener('change', inb_info_radio[i], button_fn);
+				inb_info_radio[i].addEventListener('change', button_fn, false);
 			}
 		}
 
@@ -1119,7 +1119,7 @@ outai_template.prototype = {
 				}
 			};
 			for (var i = 0, len = inputsAll.length; i < len; i++) {
-				self.addEventListener('keydown', inputsAll[i], escEsc);
+				inputsAll[i].addEventListener('keydown', escEsc, false);
 			}
 		}
 
@@ -1163,7 +1163,7 @@ outai_template.prototype = {
 				return self.indexOf(x) === i;
 			});
 			for (var i = 0; i < radioToggleDis.length; i++) {
-				self.addEventListener('change', radioToggleDis[i], toggleDisable);
+				radioToggleDis[i].addEventListener('change', toggleDisable, false);
 			}
 		}
 		
@@ -1172,7 +1172,7 @@ outai_template.prototype = {
 			var chkToggleDis = document.querySelectorAll('input[type="checkbox"][data-disable-toggle]');
 			chkToggleDis = [].slice.call(chkToggleDis);
 			for (var i = 0; i < chkToggleDis.length; i++) {
-				self.addEventListener('change', chkToggleDis[i], toggleDisable);
+				chkToggleDis[i].addEventListener('change', toggleDisable, false);
 			}
 		}
 
@@ -1190,7 +1190,7 @@ outai_template.prototype = {
 			var selectToggle = document.querySelectorAll('select[data-toggle-target]');
 			selectToggle = [].slice.call(selectToggle);
 			for (var i = 0; i < selectToggle.length; i++) {
-				self.addEventListener('change', selectToggle[i], selToggleDis);
+				selectToggle[i].addEventListener('change', selToggleDis, false);
 			}
 		}
 
@@ -1210,16 +1210,16 @@ outai_template.prototype = {
 		// メニュー項目（#drawer .list-group-item）
 		var menuLists = document.querySelectorAll('#drawer .list-group-item');
 		for (var i = 0; i < menuLists.length; i++) {
-			self.addEventListener('click', menuLists[i], menu_fn);
+			menuLists[i].addEventListener('click', menu_fn, false);
 		}
 
 		// clickListener for button
 		var btns = document.getElementsByTagName('button');
 		for (var i = 0; i < btns.length; i++) {
-			self.addEventListener('click', btns[i], button_fn);
+			btns[i].addEventListener('click', button_fn, false);
 		}
 		// #gray_back
-		self.addEventListener('click', document.getElementById('gray_back'), button_fn);
+		document.getElementById('gray_back').addEventListener('click', button_fn, false);
 
 		/**
 		 * 本人確認モーダルを「決定」押下せず、モーダル背景クリックで閉じた場合。
@@ -1233,13 +1233,13 @@ outai_template.prototype = {
 		/* honkaku_inputs */ {
 			var inputEls = document.querySelectorAll('#honkaku input');
 			for (var i = 0; i < inputEls.length; i++) {
-				self.addEventListener(
-					inputEls[i],
+				inputEls[i].addEventListener(
 					'change',
 					function() {
 						self.honkaku.getCheckEl();
 						self.honkaku.setScoreBarVal(self.honkaku.getScore());
-					}
+					},
+					false
 				);
 			}
 		}
@@ -1248,12 +1248,12 @@ outai_template.prototype = {
 		{
 			var inputs = document.querySelectorAll('input[type=text], textarea');
 			for (var i = 0; i < inputs.length; i++) {
-				self.addEventListener('focus', inputs[i], function() {
+				inputs[i].addEventListener('focus', function() {
 					this.classList.add('focus');
-				});
-				self.addEventListener('blur', inputs[i], function() {
+				}, false);
+				inputs[i].addEventListener('blur', function() {
 					this.classList.remove('focus');
-				});
+				}, false);
 			}
 		}
 
@@ -1268,7 +1268,7 @@ outai_template.prototype = {
 				$memoCounter.classList.remove('red');
 			}
 		};
-		self.addEventListener('input', self.el.$inb_memo, countMemo);
+		self.el.$inb_memo.addEventListener('input', countMemo, false);
 
 		// #memo collapseで受付メモtextarea add/remove class
 		$('#memo_title').on('click', function() {
@@ -1301,11 +1301,11 @@ outai_template.prototype = {
 				$memo_resize.classList.remove('glyphicon-resize-small');
 				$memo_resize.dataset.originalTitle = '受付メモ最大化';
 			};
-			self.addEventListener('click', $memo_resize, function() {
+			$memo_resize.addEventListener('click', function() {
 				var hasResizeFull = this.classList.contains('glyphicon-resize-full');
 				hasResizeFull ? memo_fullsize() : memo_neutral();
 				self.commonFunc.changeHearingH();
-			});
+			}, false);
 		}
 
 		/* ラジオボタンで表示切り替え */ {
@@ -1316,7 +1316,7 @@ outai_template.prototype = {
 				return self.indexOf(x) === i;
 			});
 			for (var i = 0; i < toggleRadios.length; i++) {
-				self.addEventListener('change', toggleRadios[i], function() {
+				toggleRadios[i].addEventListener('change', function() {
 					var common_name = this.name;
 					var target = this.dataset.targetName;
 					// [name^={common_name}_]の要素を抽出(trやtd内ブロック単位)
@@ -1345,7 +1345,7 @@ outai_template.prototype = {
 
 					// 建物解体[Y]選択時の備考欄
 					if (/_kaitai/.test(common_name)) { self.etcFunc.kaitaiY(this); }
-				});
+				}, false);
 			}
 		}
 
@@ -1358,7 +1358,7 @@ outai_template.prototype = {
 			})(),
 			event: function() {
 				for (var i = 0; i < this.targetEls.length; i++) {
-					self.addEventListener('change', this.targetEls[i], function() {
+					this.targetEls[i].addEventListener('change', function() {
 						var common_name = this.name;
 						var target = common_name + '_' + this.selectedIndex;
 						// [name^={common_name}_]の要素を抽出（trやtd内ブロック単位）
@@ -1368,7 +1368,7 @@ outai_template.prototype = {
 						var sel_value = this.selectedIndex === 0 ? '' : this.value;
 						// select:optionのvalue値をテンプレのkey値に
 						self.temps.create_panel.change_headerData(self, self.active_tab_id, sel_value, sel_value);
-					});
+					}, false);
 				}
 			},
 			init: function() {
@@ -2284,7 +2284,7 @@ outai_template.prototype = {
 			var zipButtons = document.getElementsByName('zip');
 
 			for (var i = 0, len = zipButtons.length; i < len; i++) {
-				self.addEventListener('click', zipButtons[i], function() {
+				zipButtons[i].addEventListener('click', function() {
 					var prevInput = this.parentNode.previousElementSibling;
 					var zipCode = { code: prevInput.value.replace(/-/g, '') };
 					var kana_group = this.parentNode.parentNode.nextElementSibling.nextElementSibling;
@@ -2307,7 +2307,7 @@ outai_template.prototype = {
 					}).fail(function(xhr, t, err) {
 						console.log('Error:' + err);
 					});
-				});
+				}, false);
 			}
 
 			function zipAjax(dat) {
