@@ -2119,7 +2119,7 @@ outai_template.prototype = {
 			inputEl.dataset.disableToggle = true;
 			label.insertAdjacentElement('beforeend', inputEl);
 			label.insertAdjacentText('beforeend', obj.label);
-			div.insertAdjacentElement('beforeend', option);
+			div.insertAdjacentElement('beforeend', label);
 			if (addon)
 				this.addon_toggle(addon, div);
 			return div;
