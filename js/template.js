@@ -122,7 +122,6 @@ outai_template.prototype = {
 			self.menu = $.extend(true, data.menu, {});
 			self.honkaku.koumoku = self.jsonData.honkaku;
 			self.temps.data = JSON.stringify(self.jsonData.templates);
-			console.log(self.temps.data);
 			self.temps.data = JSON.parse(self.temps.data);
 		}).fail(function() {
 			alert('JSONファイルデータの記述を見直してください。');
@@ -1946,7 +1945,7 @@ outai_template.prototype = {
 				}
 
 				case 'checkbox-toggle-dis': {
-					var div = this.toggle_dis.base(obj, 'checkbox');
+					var div = this.toggle_dis_base(obj, 'checkbox');
 					return div;
 				}
 
