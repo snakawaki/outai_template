@@ -999,7 +999,7 @@ outai_template.prototype = {
 					var cp_msg = (btnId_Name === 'tmp_compact') ?
 								'入力済テンプレをコピーしました。':
 								'全項目テンプレをコピーしました。';
-					self.commonFunc.msg('pop', cp_msg, 1000);
+					self.commonFunc.msg_box('pop', cp_msg, 1000);
 					break;
 				}
 
@@ -2097,7 +2097,7 @@ outai_template.prototype = {
 
 		make_textarea: function() {
 			var tArea = document.createElement('textarea');
-			tArea.classList.add('form-control input-sm');
+			tArea.classList.add('form-control','input-sm');
 			return tArea;
 		},
 
@@ -2166,7 +2166,7 @@ outai_template.prototype = {
 					if (addon.id)
 						btn.id = addon.id;
 					if (addon.target)
-						bth.setAttribute('for', addon.target);
+						btn.setAttribute('for', addon.target);
 					if (addon.name)
 						btn.name = addon.name;
 					

@@ -1,34 +1,38 @@
 {
 	"menu": {
 		"契約情報変更": "#keihen",
-		"解約": "#kaiyaku",
 		"申込キャンセル": "#cancel"
 	},
 	"honkaku": {
 		"parts01": [
-			{ "label": "契約者名", "value": "契約者名", "points": 50},
-			{ "label": "請求者名", "value": "請求者名", "points": 50}
+			{ "label": "契約者名", "value": "契約名", "points": 50 },
+			{ "label": "請求者名", "value": "請求名", "points": 50 }
 		],
 		"parts02": [
-			{ "label": "請求コード", "value": "請求コード", "points": 50},
-			{ "label": "契約コード", "value": "契約コード", "points": 50},
-			{ "label": "ログインID", "value": "ログインID", "points": 50},
-			{ "label": "受付番号", "value": "受付番号", "points": 50}
+			{ "label": "AC", "value": "AC", "points": 50 },
+			{ "label": "ACC", "value": "ACC", "points": 50 },
+			{ "label": "契約コード", "value": "契約コード", "points": 50 },
+			{ "label": "地点番号", "value": "供給地点特定番号", "points": 50 },
+			{ "label": "ログインID", "value": "ログインID", "points": 50 },
+			{ "label": "セルフID", "value": "セルフID", "points": 50 },
+			{ "label": "受付番号", "value": "受付番号", "points": 50 }
 		],
 		"parts03": [
-			{ "label": "契約電話番号", "value": "契約電話番号", "points": 25},
-			{ "label": "サポートID", "value": "サポートID", "points": 25},
-			{ "label": "請求先電話番号", "value": "請求先電話番号", "points": 25},
-			{ "label": "問合せコード", "value": "問合せコード", "points": 25}
+			{ "label": "契約電話番号", "value": "契約電話番号", "points": 25 },
+			{ "label": "基本メールアドレス", "value": "基本メールアドレス", "points": 25 },
+			{ "label": "契約ドメイン名", "value": "契約ドメイン名", "points": 25 },
+			{ "label": "ADSL設置先番号", "value": "ADSL設置先番号", "points": 25 },
+			{ "label": "契約連TEL", "value": "契約連TEL", "points": 25 },
+			{ "label": "請求先連TEL", "value": "請求先連TEL", "points": 25 }
 		],
 		"parts04": [
-			{ "label": "契約先住所", "value": "契約先住所", "points": 25},
-			{ "label": "請求先住所", "value": "請求先住所", "points": 25}
+			{ "label": "契約先住所", "value": "契約住所", "points": 25 },
+			{ "label": "請求先住所", "value": "請求住所", "points": 25 }
 		]
 	},
 	"templates": {
 		"#keihen": {
-			"header": {
+			"header" : {
 				"text": "契約情報変更"
 			},
 			"contents": [
@@ -71,7 +75,7 @@
 					]
 				},
 				{
-					"title": "変更区分<br /><span class=\"red\">新情報を入力</span>",
+					"title": "変更区分<br /><span class=\"red\">*新情報を入力</span>",
 					"visible": false,
 					"attr": {
 						"name": "keihen_type_change"
@@ -80,6 +84,10 @@
 						{
 							"type": "checkbox-toggle-dis",
 							"label": "名義/フリガナ",
+							"outai_memo": {
+								"outaiIndex": 0,
+								"outaiTitle": "変更項目"
+							},
 							"addon": {
 								"type": "text",
 								"attr": {
@@ -87,45 +95,471 @@
 									"placeholder": "新情報を入力..."
 								}
 							}
-						}
-					]
-				}
-			]
-		},
-		"#kaiyaku": {
-			"header": {
-				"text": "契約情報変更"
-			},
-			"contents": [
-				{
-					"title": "変更タイプ",
-					"parts": [
-						{
-							"type": "radio-block",
-							"label": "契約者情報 変更",
-							"key": "【契約者情報変更 対応依頼】",
-							"input_attr": {
-								"name": "kaiyaku_type"
-							},
-							"target": "change"
 						},
 						{
-							"type": "radio-block",
-							"label": "誤登録による修正",
-							"key": "【誤登録による修正依頼】",
-							"input_attr": {
-								"name": "kaiyaku_type"
+							"type": "checkbox-toggle-dis",
+							"label": "郵便番号/住所",
+							"outai_memo": {
+								"outaiIndex": 1,
+								"outaiTitle": "変更項目"
 							},
-							"target": "fix"
+							"addon": {
+								"type": "text",
+								"attr": {
+									"style": "-ms-ime-mode: active;",
+									"placeholder": "新情報を入力..."
+								}
+							}
+						},
+						{
+							"type": "checkbox-toggle-dis",
+							"label": "電話番号",
+							"outai_memo": {
+								"outaiIndex": 2,
+								"outaiTitle": "変更項目"
+							},
+							"addon": {
+								"type": "text",
+								"attr": {
+									"style": "-ms-ime-mode: inactive;",
+									"placeholder": "新情報を入力..."
+								}
+							}
+						},
+						{
+							"type": "checkbox-toggle-dis",
+							"label": "E-Mail",
+							"outai_memo": {
+								"outaiIndex": 3,
+								"outaiTitle": "変更項目"
+							}
+						},
+						{
+							"type": "checkbox-toggle-dis",
+							"label": "その他",
+							"outai_memo": {
+								"outaiIndex": 4,
+								"outaiTitle": "変更項目"
+							},
+							"addon": {
+								"type": "text",
+								"attr": {
+									"style": "-ms-ime-mode: active;"
+								}
+							}
 						}
 					]
 				},
 				{
-					"title": "お客さま番号",
+					"title": "変更希望日",
 					"visible": false,
 					"attr": {
-						"name": "kaiyaku_type_common"
+						"name": "keihen_type_change"
 					},
+					"parts": [
+						{
+							"type": "radio-toggle-dis",
+							"label": "最短",
+							"input_attr": {
+								"name": "keihen_change_date"
+							}
+						},
+						{
+							"type": "radio-toggle-dis",
+							"label": "日時指定",
+							"input_attr": {
+								"name": "keihen_change_date"
+							},
+							"addon": {
+								"type": "text",
+								"attr": {
+									"style": "-ms-ime-mode: active;"
+								}
+							}
+						}
+					]
+				},
+				{
+					"title": "受付方法",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change"
+					},
+					"parts": [
+						{
+							"type": "radio-inline",
+							"label": "郵送",
+							"input_attr": {
+								"name": "keihen_type_change_uke"
+							},
+							"outai_memo": {
+								"outaiIndex": 6,
+								"outaiTitle": "書面手続き",
+								"outaiValue": "郵送となる旨案内了承"
+							},
+							"target": "post"
+						},
+						{
+							"type": "radio-inline",
+							"label": "FAX",
+							"input_attr": {
+								"name": "keihen_type_change_uke"
+							},
+							"outai_memo": {
+								"outaiIndex": 6,
+								"outaiTitle": "書面手続き",
+								"outaiValue": "FAXとなる旨案内了承"
+							},
+							"target": "fax"
+						},
+						{
+							"type": "radio-inline",
+							"label": "代筆",
+							"input_attr": {
+								"name": "keihen_type_change_uke"
+							},
+							"outai_memo": {
+								"outaiIndex": 6,
+								"outaiTitle": "書面手続き",
+								"outaiValue": "代筆となる旨案内了承"
+							},
+							"memo": {
+								"source": "※代筆可否は必ずフロー参照すること"
+							}
+						}
+					]
+				},
+				{
+					"title": "【郵送】",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change_uke_post"
+					},
+					"parts": [
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"position": "before",
+									"label": "送付先宛名"
+								}
+							]
+						},
+						{
+							"type": "clearfix"
+						},
+						{
+							"type": "input-group-min",
+							"input_attr": {
+								"style":"-ms-ime-mode: inactive;",
+								"placeholder": "000-0000"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"position": "before",
+									"label": "〒"
+								},
+								{
+									"span": "button",
+									"position": "after",
+									"label": "glyphicon-search",
+									"name": "zip",
+									"icon": true
+								}
+							]
+						},
+						{
+							"type": "clearfix"
+						},
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;"
+							},
+							"log": "none",
+							"addon": [
+								{
+									"span": "text",
+									"position": "before",
+									"label": "住所（カナ）"
+								}
+							]
+						},
+						{
+							"type": "clearfix"
+						},
+						{
+							"type": "input-group",
+							"base": "textarea",
+								"input_attr": {
+									"style": "-ms-ime-mode: active; height: 3em;"
+								},
+							"addon": [
+								{
+									"span": "text",
+									"position": "before",
+									"label": "住所"
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "【FAX】",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change_uke_fax"
+					},
+					"parts": [
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: inactive;"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"label": "FAX番号",
+									"position": "before"
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "変更理由",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change"
+					},
+					"parts": [
+						{
+							"type": "textarea",
+							"attr": {
+								"style":"-ms-ime-mode: active; height: 7em;",
+								"placeholder": "変更理由を詳細に"
+							},
+							"outai_memo": {
+								"outaiIndex": 5,
+								"outaiTitle": "理由"
+							}
+						}
+					]
+				},
+				{
+					"title": "証明書",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change"
+					},
+					"parts": [
+						{
+							"type": "radio-inline",
+							"label": "不要",
+							"input_attr": {
+								"name": "keihen_type_change_proof"
+							}
+						},
+						{
+							"type": "radio-inline",
+							"label": "必要",
+							"input_attr": {
+								"name": "keihen_type_change_proof"
+							},
+							"target": "1"
+						}
+					]
+				},
+				{
+					"title": "ご提出書類",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change_proof_1"
+					},
+					"parts": [
+						{
+							"type": "radio-block",
+							"label": "謄本",
+							"input_attr": {
+								"name":"keihen_type_change_paper"
+							}
+						},
+						{
+							"type": "radio-block",
+							"label": "履歴事項全部証明書",
+							"input_attr": {
+								"name":"keihen_type_change_paper"
+							},
+							"memo": {
+								"source": "※部署名・代表者名変更などを除く契約名義変更は証明書が必要<br />※上記2点不可の場合：社名変更の案内状/HPプリントアウトでも可"
+							}
+						}
+					]
+				},
+				{
+					"title": "担当者名",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change"
+					},
+					"parts": [
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"label": "様",
+									"position": "after"
+								},
+								{
+									"span": "button",
+									"label": "入電者情報から貼付",
+									"position": "after",
+									"name": "paste",
+									"target": "tantou_name"
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "連TEL",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_common"
+					},
+					"parts": [
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: inactive;"
+							},
+							"outai_memo": {
+								"outaiIndex": 7,
+								"outaiTitle": "担当者連絡先"
+							},
+							"addon": [
+								{
+									"span": "button",
+									"label": "入電者情報から貼付",
+									"position": "after",
+									"name": "paste",
+									"target": "inbound_tel"
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "備考",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_change"
+					},
+					"parts": [
+						{
+							"type": "textarea",
+							"attr": {
+								"style": "-ms-ime-mode: active; height: 7em;",
+								"value": "・捺印依頼済"
+							}
+						}
+					]
+				},
+				{
+					"title": "変更項目",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_fix"
+					},
+					"parts": [
+						{
+							"type": "input-text",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;",
+								"placeholder": "項目名：フリー入力"
+							}
+						},
+						{
+							"type": "clearfix"
+						},
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"position": "before",
+									"label": "正）"
+								}
+							]
+						},
+						{
+							"type": "clearfix"
+						},
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"position": "before",
+									"label": "誤）"
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "備考",
+					"visible": false,
+					"attr": {
+						"name": "keihen_type_fix"
+					},
+					"parts": [
+						{
+							"type": "textarea",
+							"attr": {
+								"style": "-ms-ime-mode: active; height: 7em;",
+								"value": "『～』が間違っているとの申告有。/○○SV/LD了承済。"
+							},
+							"outai_memo": {
+								"outaiIndex": 0,
+								"outaiTitle": "　"
+							}
+						}
+					]
+					
+				}
+			]
+		},
+		"#cancel": {
+			"header": {
+				"text": "申込キャンセル",
+				"key": "【申込キャンセル依頼】"
+			},
+			"contents": [
+				{
+					"title": "利用開始日３営業日前なら受付可能",
+					"th": {
+						"colspan": 2,
+						"class": "red center bold"
+					}
+				},
+				{
+					"title": "お客さま番号",
 					"parts": [
 						{
 							"type": "input-text",
@@ -136,21 +570,74 @@
 					]
 				},
 				{
-					"title": "変更区分<br /><span class=\"red\">新情報を入力</span>",
-					"visible": false,
-					"attr": {
-						"name": "kaiyaku_type_change"
-					},
+					"title": "【ご要望】",
 					"parts": [
 						{
-							"type": "checkbox-toggle-dis",
-							"label": "名義/フリガナ",
-							"addon": {
-								"type": "text",
-								"attr": {
-									"style": "-ms-ime-mode: active;",
-									"placeholder": "新情報を入力..."
+							"type": "radio-inline",
+							"label": "申込キャンセル希望",
+							"input_attr": {
+								"name": "cancel_youbou"
+							},
+							"checked": true
+						}
+					]
+				},
+				{
+					"title": "理由",
+					"parts": [
+						{
+							"type": "textarea",
+							"attr": {
+								"style":"-ms-ime-mode: active; height: 7em;"
+							}
+						}
+					]
+				},
+				{
+					"title": "担当者名",
+					"parts": [
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: active;"
+							},
+							"addon": [
+								{
+									"span": "text",
+									"label": "様",
+									"position": "after"
+								},
+								{
+									"span": "button",
+									"label": "入電者情報から貼付",
+									"position": "after",
+									"name": "paste",
+									"target": "tantou_name"
 								}
+							]
+						}
+					]
+				},
+				{
+					"title": "連TEL",
+					"parts": [
+						{
+							"type": "input-group",
+							"input_attr": {
+								"style": "-ms-ime-mode: inactive;"
+							},
+							"addon": [
+								{
+									"span": "button",
+									"label": "入電者情報から貼付",
+									"position": "after",
+									"name": "paste",
+									"target": "inbound_tel"
+								}
+							],
+							"outai_memo": {
+								"outaiIndex": 0,
+								"outaiTitle": "詳細は引継参照　担当者連絡先"
 							}
 						}
 					]
