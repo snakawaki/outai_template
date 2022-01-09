@@ -39,6 +39,10 @@ div.form-group {
 	font-size: 15px;
 }
 
+#memo #accopy div.input-group[class*=col-] {
+	float: left;
+}
+
 #memo div.form-group:nth-child(odd) {
 	background-color: #f6f6f6;
 }
@@ -127,7 +131,7 @@ div.form-group {
 .panel-body .table { margin-bottom: 0; }
 
 #template { float: right; }
-#template .panel-body { background-color: #f5f5f5; padding: 0; }
+#template .panel-body { background-color: #f5f5f5; }
 
 #template > div.tab-content > div.tab-pane > div.panel {
 	height: calc(100vh - 58px);
@@ -146,10 +150,19 @@ div.form-group {
 	vertical-align: middle !important;
 	border-right: 1px solid #ccc;
 }
+#template > div.tab-content > div.tab-pane > div.panel > div.panel-body {
+	height: calc(100vh - 141.6px);
+	overflow-y: auto;
+	padding: 0;
+}
 #template > div.tab-content > div:firtst-child.tab-pane > div.panel > div.panel-body { padding: 15px; }
 .panel-body td { background-color: #fff; }
 .nav-stacked > li + li { margin-top: 0; }
 select[id^="select_supp"] + select { margin-top: 1em; }
+
+#template > div.tab-content > div.tab-pane > div.panel > div.panel-footer {
+	background-color: #fff;
+}
 
 #drawer {
 	position: fixed;

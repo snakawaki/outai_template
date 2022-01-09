@@ -366,13 +366,13 @@ EiRekiCal.prototype = {
 	},
 
 	boolHeijitsu: function(d) {
-		var syuNo = holiday.func(d.getFullYear(), d.getMonth() + 1, d.getDate());
+		var syuNo = holidays.func(d.getFullYear(), d.getMonth() + 1, d.getDate());
 		return (d.getDay() == 0 || d.getDay() == 6 || syuNo >= 0) ? false : true;
 	},
 
 	checkEachDate: function(dObj) {
 		/* 祝日判定 */
-		var syuNo = holiday.func(dObj.yyyy, dObj.mm, dObj.dd);
+		var syuNo = holidays.func(dObj.yyyy, dObj.mm, dObj.dd);
 		if (syuNo >= 0) {
 			dObj.class += ' holidays';
 		}
@@ -440,12 +440,12 @@ EiRekiCal.prototype = {
 	},
 
 	removeBackdrop: function() {
-		var backDiv = document.body.getElementById('calBackdrop');
+		var backDiv = document.getElementById('calBackdrop');
 		backDiv.parentNode.removeChild(backDiv);
 	},
 	toggleCal: function() {
 		// toggle calendar instance
-		var cal = document.body.getElementById('div_' + this.instance);
+		var cal = document.getElementById('div_' + this.instance);
 
 		if (cal.style.display === 'none' || !cal.style.display) {
 			cal.style.display = 'block';
@@ -470,7 +470,7 @@ EiRekiCal.prototype = {
 
 		// 前月をクリック
 		self.addListener(
-			document.body.getElementById(self.instance + '_prevMonth'),
+			document.getElementById(self.instance + '_prevMonth'),
 			'click',
 			function() {
 				self.setNengetsu(-1);
@@ -480,7 +480,7 @@ EiRekiCal.prototype = {
 
 		// 当月をクリック
 		self.addListener(
-			document.body.getElementById(self.instance + '_currMonth'),
+			document.getElementById(self.instance + '_currMonth'),
 			'click',
 			function() {
 				self.setNengetsu(0);
@@ -490,7 +490,7 @@ EiRekiCal.prototype = {
 
 		// 次月をクリック
 		self.addListener(
-			document.body.getElementById(self.instance + '_nextMonth'),
+			document.getElementById(self.instance + '_nextMonth'),
 			'click',
 			function() {
 				self.setNengetsu(1);
@@ -684,7 +684,7 @@ holidays = {
 
 	howDay: function(year, month, n, WantDayWeek) {
 		var nichi;
-		var FirstDay = new Day(year, month - 1, 1);
+		var FirstDay = new Date(year, month - 1, 1);
 		// 1日の日曜日
 		var FirstDayWeek = FirstDay.getDay();
 		// 求めたい日付（0かプラスの場合）

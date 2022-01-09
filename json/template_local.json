@@ -12,7 +12,6 @@
 			{ "label": "AC", "value": "AC", "points": 50 },
 			{ "label": "ACC", "value": "ACC", "points": 50 },
 			{ "label": "契約コード", "value": "契約コード", "points": 50 },
-			{ "label": "地点番号", "value": "供給地点特定番号", "points": 50 },
 			{ "label": "ログインID", "value": "ログインID", "points": 50 },
 			{ "label": "セルフID", "value": "セルフID", "points": 50 },
 			{ "label": "受付番号", "value": "受付番号", "points": 50 }
@@ -21,7 +20,6 @@
 			{ "label": "契約電話番号", "value": "契約電話番号", "points": 25 },
 			{ "label": "基本メールアドレス", "value": "基本メールアドレス", "points": 25 },
 			{ "label": "契約ドメイン名", "value": "契約ドメイン名", "points": 25 },
-			{ "label": "ADSL設置先番号", "value": "ADSL設置先番号", "points": 25 },
 			{ "label": "契約連TEL", "value": "契約連TEL", "points": 25 },
 			{ "label": "請求先連TEL", "value": "請求先連TEL", "points": 25 }
 		],
@@ -43,6 +41,9 @@
 							"type": "radio-block",
 							"label": "契約者情報 変更",
 							"key": "【契約者情報変更 対応依頼】",
+							"valid": {
+								"validKey": "aaaa"
+							},
 							"input_attr": {
 								"name": "keihen_type"
 							},
@@ -70,6 +71,9 @@
 							"type": "input-text",
 							"input_attr": {
 								"style": "-ms-ime-mode: inactive;"
+							},
+							"valid": {
+								"validSubkey": "aaaa"
 							}
 						}
 					]
@@ -158,23 +162,12 @@
 					},
 					"parts": [
 						{
-							"type": "radio-toggle-dis",
-							"label": "最短",
-							"input_attr": {
-								"name": "keihen_change_date"
-							}
-						},
-						{
-							"type": "radio-toggle-dis",
-							"label": "日時指定",
-							"input_attr": {
-								"name": "keihen_change_date"
-							},
-							"addon": {
-								"type": "text",
-								"attr": {
-									"style": "-ms-ime-mode: active;"
-								}
+							"type": "calendar",
+							"cal_ops": {
+								"id": "cal_01",
+								"type": 2,
+								"gap_days": [3],
+								"memo": "※3営業日以降"
 							}
 						}
 					]

@@ -12,7 +12,9 @@
 	<script src="./js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div id="alert_message" style="display: none;"></div>
+	<div id="alert_message" style="display: none;">
+		<div></div>
+	</div>
 	<div id="pop_message" style="display: none;">
 		<div></div>
 	</div>
@@ -96,9 +98,6 @@
 						<div class="form-group nowrap">
 							<label for="corp_name" class="col-xs-2 control-label">法人名/屋号:</label>
 							<div class="col-xs-10 input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-default btn-sm" for="paste_from_sigma">貼付</button>
-								</span>
 								<input type="text" id="corp_name" class="form-control input-sm" style="-ms-ime-mode: active;">
 								<span class="input-group-addon">様</span>
 								<span class="input-group-btn">
@@ -107,7 +106,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div id="accopy" class="form-group">
 							<label class="col-xs-2 control-label nowrap">
 								<span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-original-title="※[入電者情報コピー]対象外" data-toggle="tooltip" data-container="body"></span> アカウント:
 							</label>
@@ -146,21 +145,6 @@
 								<span class="input-group-btn">
 									<button class="btn btn-primary btn-sm" name="copy" for="inbound_tel">COPY</button>
 								</span>
-							</div>
-						</div>
-
-						<div class="form-group nowrap">
-							<label class="col-xs-4 control-label"><span class="red">[K]</span>ご利カス/アプリ勧奨:</label>
-							<div class="col-xs-4">
-								<label class="radio-inline"><input type="radio" name="gori_app" value="1" data-disable-toggle="toggle">していない</label>
-								<label class="radio-inline"><input type="radio" name="gori_app" value="0" data-disable-toggle="toggle">した</label>
-							</div>
-							<div class="col-xs-4">
-								<select id="gori_app_sel" class="form-control input-sm" disabled>
-									<option>1.アプリ</option>
-									<option>2.ご利</option>
-									<option>3.ご利/アプリ</option>
-								</select>
 							</div>
 						</div>
 
@@ -211,10 +195,45 @@
 				<div role="tabpanel" class="tab-pane active" id="help">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h5 class="panel-title">テンプレヘルプ</h5>
+							<h5 class="panel-title">■■■テンプレ使い方■■■</h5>
 						</div>
 						<div class="panel-body" style="overflow-y: auto;">
-							<div class="panel-group" id="helpGroup"></div>
+							<div class="panel-group" id="helpGroup">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h5 class="panel-title" style="font-size: 15px;">
+											<a href="#help1" class="help" data-toggle="collapse" data-parent="#helpGroup">01.各テンプレの項目名が<span class="red bold">赤文字</span>の場合</a>
+										</h5>
+									</div>
+									<div id="help1" class="panel-collapse collapse">
+										<div class="panel-body">
+											<img src="./img/help01.png" style="width: 100%;" />
+											<br style="clear: both;" />
+											<img src="./img/help02.png" style="width: 100%;" />
+											右側のラジオボタンを選択することで、各々に対応した聴取項目が表示/切替されます。
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h5 class="panel-title" style="font-size: 15px;">
+											<a href="#help2" class="help" data-toggle="collapse" data-parent="#helpGroup">02.各種テンプレCOPYボタンについて</a>
+										</h5>
+									</div>
+									<div id="help2" class="panel-collapse collapse">
+										<div class="panel-body">
+											<img src="./img/help03.png" style="width: 100%;" />
+											選択/入力された項目のみがログ作成の対象となります。非選択/未入力項目はするーされます。
+											<br style="clear: both;" />
+											<img src="./img/help04.png" style="width: 100%;" />
+											各テンプレ用の応対メモを作成します。非選択/未入力項目も対象ですが、その場合は空白となります。
+											<br style="clear: both;" />
+											<img src="./img/help05.png" style="width: 100%;" />
+											選択/入力の有無に関係なく、テンプレで表示されている全項目がログ作成の対象です。
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

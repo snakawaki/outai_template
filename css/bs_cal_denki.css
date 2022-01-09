@@ -68,7 +68,7 @@ table[id^=tbl_cal] tbody td:last-child.unClickable.trans {
 }
 
 table[id^=tbl_cal] .today_cell {
-	color: yellow !important;
+	background-color: yellow !important;
 }
 
 table[id^=tbl_cal] .today_cell.unClickable.trans {

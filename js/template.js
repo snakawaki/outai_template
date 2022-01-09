@@ -141,15 +141,15 @@ outai_template.prototype = {
 
 	// 使い回し用関数群
 	commonFunc: {
-		// addListener: function(elm, ev, listener) {
-		// 	if (elm.addEventListener) {
-		// 		elm.addEventListener(ev, listener, false);
-		// 	} else if (elm.attachEvent) {
-		// 		elm.attachEvent('on' + ev, listener);
-		// 	} else {
-		// 		throw new Error('イベントリスナーに未対応です');
-		// 	}
-		// },
+		addListener: function(elm, ev, listener) {
+			if (elm.addEventListener) {
+				elm.addEventListener(ev, listener, false);
+			} else if (elm.attachEvent) {
+				elm.attachEvent('on' + ev, listener);
+			} else {
+				throw new Error('イベントリスナーに未対応です');
+			}
+		},
 
 		cmdCopy: function(target) {
 			target.focus();
@@ -159,6 +159,7 @@ outai_template.prototype = {
 			} else {
 				navigator.clipboard.writeText(target.value);
 			}
+			return true;
 		},
 
 		copySet: function(val) {
@@ -199,7 +200,7 @@ outai_template.prototype = {
 		// テンプレコピーボタン設置
 		set_footer_btn: function(id) {
 			var cp_compact = '<div class="col-xs-4"><button class="btn btn-primary btn-block btn-sm" type="button" name="tmp_compact">入力項目テンプレ COPY</button></div>';
-			var cp_whole = '<div class="col-xs-4"><button class="btn btn-primary btn-block btn-sm" type="button" name="tmp_whole">全項目テンプレ</button></div>';
+			var cp_whole = '<div class="col-xs-4"><button class="btn btn-primary btn-block btn-sm" type="button" name="tmp_whole">全項目テンプレ COPY</button></div>';
 			var cp_outai = '<div class="col-xs-4"><button class="btn btn-success btn-block btn-sm" type="button" name="outai_memo">応対メモ COPY</button></div>';
 
 			var def = cp_compact + cp_outai + cp_whole;
@@ -356,7 +357,7 @@ outai_template.prototype = {
 		validate: function(self, tab_id) {
 			/**
 			 * 表示されたテンプレ内のバリデーションチェック
-			 * 主キー[data-valid-key]とペアキー[data-valid-pair]が同値同士で入力/選択チェック
+			 * 主キー[data-valid-key]とペアキー[data-valid-subkey]が同値同士で入力/選択チェック
 			 * 主キー要素に値があれば、ペアキー要素にも値の入力/選択が必須。
 			 * 主キー要素に値無ければスルー。ペアキー要素は見ない。
 			 */
@@ -395,7 +396,7 @@ outai_template.prototype = {
 			}
 
 			var v_subs_arr = [];
-			for (var i = 0, len = v_subs_arr.length; i < len; i++) {
+			for (var i = 0, len = v_subs.length; i < len; i++) {
 				var lastEl = self.logging.drilldown(v_subs[i], 'validate');
 				if (lastEl) {
 					lastEl.valSubkey = v_subs[i].dataset.validSubkey || null;
@@ -1093,7 +1094,7 @@ outai_template.prototype = {
 		};
 
 		// 法人名/屋号入力欄ペーストイベント
-		document.querySelector('#corp_name').addEventListener('paste', function(ev) {
+		self.commonFunc.addListener(document.querySelector('#corp_name'), 'paste', function(ev) {
 			var tmpVal = '';
 			tmpVal = (ev.clipboarData || window.clipboarData).getData('text');
 			tmpVal = tmpVal.replace(/\r?\n/g, '');
@@ -1105,7 +1106,7 @@ outai_template.prototype = {
 		{
 			var inb_info_radio = document.querySelectorAll('#hearing inmput[name=inbound_info]');
 			for (var i = 0; i < inb_info_radio.length; i++) {
-				inb_info_radio[i].addEventListener('change', button_fn, false);
+				self.commonFunc.addListener(inb_info_radio[i], 'change', button_fn);
 			}
 		}
 
@@ -1119,7 +1120,7 @@ outai_template.prototype = {
 				}
 			};
 			for (var i = 0, len = inputsAll.length; i < len; i++) {
-				inputsAll[i].addEventListener('keydown', escEsc, false);
+				self.commonFunc.addListener(inputsAll[i], 'keydown', escEsc);
 			}
 		}
 
@@ -1163,7 +1164,7 @@ outai_template.prototype = {
 				return self.indexOf(x) === i;
 			});
 			for (var i = 0; i < radioToggleDis.length; i++) {
-				radioToggleDis[i].addEventListener('change', toggleDisable, false);
+				self.commonFunc.addListener(radioToggleDis[i], 'change', toggleDisable);
 			}
 		}
 		
@@ -1172,7 +1173,7 @@ outai_template.prototype = {
 			var chkToggleDis = document.querySelectorAll('input[type="checkbox"][data-disable-toggle]');
 			chkToggleDis = [].slice.call(chkToggleDis);
 			for (var i = 0; i < chkToggleDis.length; i++) {
-				chkToggleDis[i].addEventListener('change', toggleDisable, false);
+				self.commonFunc.addListener(chkToggleDis[i], 'change', toggleDisable);
 			}
 		}
 
@@ -1190,7 +1191,7 @@ outai_template.prototype = {
 			var selectToggle = document.querySelectorAll('select[data-toggle-target]');
 			selectToggle = [].slice.call(selectToggle);
 			for (var i = 0; i < selectToggle.length; i++) {
-				selectToggle[i].addEventListener('change', selToggleDis, false);
+				self.commonFunc.addListener(selectToggle[i], 'change', selToggleDis);
 			}
 		}
 
@@ -1210,16 +1211,16 @@ outai_template.prototype = {
 		// メニュー項目（#drawer .list-group-item）
 		var menuLists = document.querySelectorAll('#drawer .list-group-item');
 		for (var i = 0; i < menuLists.length; i++) {
-			menuLists[i].addEventListener('click', menu_fn, false);
+			self.commonFunc.addListener(menuLists[i], 'click', menu_fn);
 		}
 
 		// clickListener for button
 		var btns = document.getElementsByTagName('button');
 		for (var i = 0; i < btns.length; i++) {
-			btns[i].addEventListener('click', button_fn, false);
+			self.commonFunc.addListener(btns[i], 'click', button_fn);
 		}
 		// #gray_back
-		document.getElementById('gray_back').addEventListener('click', button_fn, false);
+		self.commonFunc.addListener(document.getElementById('gray_back'), 'click', button_fn);
 
 		/**
 		 * 本人確認モーダルを「決定」押下せず、モーダル背景クリックで閉じた場合。
@@ -1233,14 +1234,10 @@ outai_template.prototype = {
 		/* honkaku_inputs */ {
 			var inputEls = document.querySelectorAll('#honkaku input');
 			for (var i = 0; i < inputEls.length; i++) {
-				inputEls[i].addEventListener(
-					'change',
-					function() {
+				self.commonFunc.addListener(inputEls[i], 'change', function() {
 						self.honkaku.getCheckEl();
 						self.honkaku.setScoreBarVal(self.honkaku.getScore());
-					},
-					false
-				);
+				});
 			}
 		}
 
@@ -1248,12 +1245,12 @@ outai_template.prototype = {
 		{
 			var inputs = document.querySelectorAll('input[type=text], textarea');
 			for (var i = 0; i < inputs.length; i++) {
-				inputs[i].addEventListener('focus', function() {
+				self.commonFunc.addListener(inputs[i], 'focus', function() {
 					this.classList.add('focus');
-				}, false);
-				inputs[i].addEventListener('blur', function() {
+				});
+				self.commonFunc.addListener(inputs[i], 'blur', function() {
 					this.classList.remove('focus');
-				}, false);
+				});
 			}
 		}
 
@@ -1268,7 +1265,7 @@ outai_template.prototype = {
 				$memoCounter.classList.remove('red');
 			}
 		};
-		self.el.$inb_memo.addEventListener('input', countMemo, false);
+		self.commonFunc.addListener(self.el.$inb_memo, 'input', countMemo);
 
 		// #memo collapseで受付メモtextarea add/remove class
 		$('#memo_title').on('click', function() {
@@ -1301,11 +1298,11 @@ outai_template.prototype = {
 				$memo_resize.classList.remove('glyphicon-resize-small');
 				$memo_resize.dataset.originalTitle = '受付メモ最大化';
 			};
-			$memo_resize.addEventListener('click', function() {
+			self.commonFunc.addListener($memo_resize, 'click', function() {
 				var hasResizeFull = this.classList.contains('glyphicon-resize-full');
 				hasResizeFull ? memo_fullsize() : memo_neutral();
 				self.commonFunc.changeHearingH();
-			}, false);
+			});
 		}
 
 		/* ラジオボタンで表示切り替え */ {
@@ -1316,7 +1313,7 @@ outai_template.prototype = {
 				return self.indexOf(x) === i;
 			});
 			for (var i = 0; i < toggleRadios.length; i++) {
-				toggleRadios[i].addEventListener('change', function() {
+				self.commonFunc.addListener(toggleRadios[i], 'change', function() {
 					var common_name = this.name;
 					var target = this.dataset.targetName;
 					// [name^={common_name}_]の要素を抽出(trやtd内ブロック単位)
@@ -1345,7 +1342,7 @@ outai_template.prototype = {
 
 					// 建物解体[Y]選択時の備考欄
 					if (/_kaitai/.test(common_name)) { self.etcFunc.kaitaiY(this); }
-				}, false);
+				});
 			}
 		}
 
@@ -1358,7 +1355,7 @@ outai_template.prototype = {
 			})(),
 			event: function() {
 				for (var i = 0; i < this.targetEls.length; i++) {
-					this.targetEls[i].addEventListener('change', function() {
+					self.commonFunc.addListener(this.targetEls[i], 'change', function() {
 						var common_name = this.name;
 						var target = common_name + '_' + this.selectedIndex;
 						// [name^={common_name}_]の要素を抽出（trやtd内ブロック単位）
@@ -1368,7 +1365,7 @@ outai_template.prototype = {
 						var sel_value = this.selectedIndex === 0 ? '' : this.value;
 						// select:optionのvalue値をテンプレのkey値に
 						self.temps.create_panel.change_headerData(self, self.active_tab_id, sel_value, sel_value);
-					}, false);
+					});
 				}
 			},
 			init: function() {
@@ -1394,50 +1391,7 @@ outai_template.prototype = {
 				nestRadio[k].checked = false;
 			}
 		}
-
-		// select[id^=select_supp] 電力会社別、契約種別項目表示
-		var supp_plan = {
-			targetEls: (function() {
-				return document.querySelectorAll('#template select[id^="select_supp"]');
-			})(),
-			supp: ['北海道電力', '東北電力', '東京電力', '中部電力', '北陸電力', '九州電力'],
-			planBC: ['従量電灯B', '従量電灯C', '低圧電力', '従量電灯B+低圧電力', '従量電灯C+低圧電力'],
-			planAB: ['従量電灯A', '従量電灯B', '低圧電力', '従量電灯A+低圧電力', '従量電灯B+低圧電力'],
-			event: function() {
-				var self = this;
-				for (var i = 0; i < self.targetEls.length; i++) {
-					self.targetEls[i].addEventListener('change', function() {
-						var ind = this.selectedIndex;
-						var opt = this.options;
-						self.set_plan(this, ind, opt[ind].textContent);
-					});
-				}
-			},
-			set_plan: function(select, ind, val) {
-				var select_plan = document.getElementById(select.getAttribute('for'));
-				if (!select_plan) return false;
-				var options = select_plan.children;
-				options = [].slice.call(options);
-				// 一旦、契約種別のindex:0より後ろをクリア
-				for (var i = 0, len = options.length; i < len; i++) {
-					select_plan.removeChild(options[i]);
-				}
-				// index:0でもfalse返す
-				if (ind === 0) return false;
-
-				// 従量電灯B・Cの電力会社か判別
-				if (this.supp.includes(val)) {
-					self.temps.add_option(this.planBC, select_plan);
-				} else {
-					self.temps.add_option(this.planAB, select_plan);
-				}
-			},
-			init: function() {
-				this.event();
-			}
-		}
-		supp_plan.init();
-
+		
 		/**
 		 * 入電者情報：会社名、担当者名、所属、連TELを入力し、
 		 * カーソル外れたら(blur)テンプレ側の当該項目にも自動反映させる。
@@ -2024,21 +1978,6 @@ outai_template.prototype = {
 						selectEl.dataset.optionToggle = "true";
 					}
 					return selectEl;
-				}
-
-				case 'supp_plan': {
-					// 主に電力会社/契約種別タイプ用
-					var attr = obj_select.attr ? obj_select.attr : false;
-					var select_supp = this.select_base();
-					if (attr) {
-						for (var k in attr) {
-							if (attr.hasOwnProperty(k)) {
-								select_supp.setAttribute(k, attr[k]);
-							}
-						}
-					}
-					this.add_option(obj_select.option, select_supp);
-					return select_supp;
 				}
 
 				case 'calendar': {
