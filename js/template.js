@@ -2229,7 +2229,7 @@ outai_template.prototype = {
 					var kana_group = this.parentNode.parentNode.nextElementSibling.nextElementSibling;
 					var kana_el = kana_group.childNodes[1];
 					var addr_group = kana_group.nextElementSibling.nextElementSibling;
-					var addr_el = kana_group.childNodes[1];
+					var addr_el = addr_group.childNodes[1];
 					zipAjax(zipCode).done(function(data) {
 						if (!data) {
 							self.commonFunc.msg_box('alert', '該当する住所が見つかりませんでした。', 1000);
