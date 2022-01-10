@@ -2206,26 +2206,26 @@ outai_template.prototype = {
 	zipCode: {
 		setSearch: function(self) {
 			var henkanObj = {
+				'ｶﾞ': 'ガ', 'ｷﾞ': 'ギ', 'ｸﾞ': 'グ', 'ｹﾞ': 'ゲ', 'ｺﾞ': 'ゴ','ｻﾞ': 'ザ', 'ｼﾞ': 'ジ', 'ｽﾞ': 'ズ', 'ｾﾞ': 'ゼ', 'ｿﾞ': 'ゾ',
+				'ﾀﾞ': 'ダ', 'ﾁﾞ': 'ヂ', 'ﾂﾞ': 'ヅ', 'ﾃﾞ': 'デ', 'ﾄﾞ': 'ド','ﾊﾞ': 'バ', 'ﾋﾞ': 'ビ', 'ﾌﾞ': 'ブ', 'ﾍﾞ': 'ベ', 'ﾎﾞ': 'ボ',
+				'ﾊﾟ': 'パ', 'ﾋﾟ': 'ピ', 'ﾌﾟ': 'プ', 'ﾍﾟ': 'ペ', 'ﾎﾟ': 'ポ','ｳﾞ': 'ヴ', 'ﾜﾞ': 'ヷ', 'ｦﾞ': 'ヺ',
 				'ｱ': 'ア', 'ｲ': 'イ', 'ｳ': 'ウ', 'ｴ': 'エ', 'ｵ': 'オ','ｶ': 'カ', 'ｷ': 'キ', 'ｸ': 'ク', 'ｹ': 'ケ', 'ｺ': 'コ',
 				'ｻ': 'サ', 'ｼ': 'シ', 'ｽ': 'ス', 'ｾ': 'セ', 'ｿ': 'ソ','ﾀ': 'タ', 'ﾁ': 'チ', 'ﾂ': 'ツ', 'ﾃ': 'テ', 'ﾄ': 'ト',
 				'ﾅ': 'ナ', 'ﾆ': 'ニ', 'ﾇ': 'ヌ', 'ﾈ': 'ネ', 'ﾉ': 'ノ','ﾊ': 'ハ', 'ﾋ': 'ヒ', 'ﾌ': 'フ', 'ﾍ': 'ヘ', 'ﾎ': 'ホ',
 				'ﾏ': 'マ', 'ﾐ': 'ミ', 'ﾑ': 'ム', 'ﾒ': 'メ', 'ﾓ': 'モ','ﾔ': 'ヤ', 'ﾕ': 'ユ', 'ﾖ': 'ヨ',
 				'ﾗ': 'ラ', 'ﾘ': 'リ', 'ﾙ': 'ル', 'ﾚ': 'レ', 'ﾛ': 'ロ','ﾜ': 'ワ', 'ｦ': 'ヲ', 'ﾝ': 'ン',
 				'ｧ': 'ァ', 'ｨ': 'ィ', 'ｩ': 'ゥ', 'ｪ': 'ェ', 'ｫ': 'ォ','ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
-				'ｶﾞ': 'ガ', 'ｷﾞ': 'ギ', 'ｸﾞ': 'グ', 'ｹﾞ': 'ゲ', 'ｺﾞ': 'ゴ','ｻﾞ': 'ザ', 'ｼﾞ': 'ジ', 'ｽﾞ': 'ズ', 'ｾﾞ': 'ゼ', 'ｿﾞ': 'ゾ',
-				'ﾀﾞ': 'ダ', 'ﾁﾞ': 'ヂ', 'ﾂﾞ': 'ヅ', 'ﾃﾞ': 'デ', 'ﾄﾞ': 'ド','ﾊﾞ': 'バ', 'ﾋﾞ': 'ビ', 'ﾌﾞ': 'ブ', 'ﾍﾞ': 'ベ', 'ﾎﾞ': 'ボ',
-				'ﾊﾟ': 'パ', 'ﾋﾟ': 'ピ', 'ﾌﾟ': 'プ', 'ﾍﾟ': 'ペ', 'ﾎﾟ': 'ポ','ｳﾞ': 'ヴ', 'ﾜﾞ': 'ヷ', 'ｦﾞ': 'ヺ',
 				'｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
 			};
 
-			const reg = new RegExp('[' + Object.keys(henkanObj).join('|') + ']', 'g');
+			const reg = new RegExp('(' + Object.keys(henkanObj).join('|') + ')', 'g');
 
 			var zipButtons = document.getElementsByName('zip');
 
 			for (var i = 0, len = zipButtons.length; i < len; i++) {
 				zipButtons[i].addEventListener('click', function() {
 					var prevInput = this.parentNode.previousElementSibling;
-					var zipCode = { code: prevInput.value.replace(/-/g, '') };
+					var zipCode = { zipcode: prevInput.value.replace(/-/g, '') };
 					var kana_group = this.parentNode.parentNode.nextElementSibling.nextElementSibling;
 					var kana_el = kana_group.childNodes[1];
 					var addr_group = kana_group.nextElementSibling.nextElementSibling;
@@ -2238,10 +2238,11 @@ outai_template.prototype = {
 							prevInput.focus();
 							prevInput.select();
 						} else {
-							var kana1 = data[0].kana1.replace(reg, function(match) { return henkanObj[match]; });
-							var kana2 = data[0].kana2.replace(reg, function(match) { return henkanObj[match]; });
-							kana_el.value = kana1 + '　' + kana2;
-							addr_el.value = data[0].pref + data[0].add1 + data[0].add2;
+							var kana1 = data["results"][0].kana1.replace(reg, function(match) { return henkanObj[match]; }).replace(/ﾞ/g, '゛').replace(/ﾟ/g, '゜');
+							var kana2 = data["results"][0].kana2.replace(reg, function(match) { return henkanObj[match]; }).replace(/ﾞ/g, '゛').replace(/ﾟ/g, '゜');
+							var kana3 = data["results"][0].kana3.replace(reg, function(match) { return henkanObj[match]; }).replace(/ﾞ/g, '゛').replace(/ﾟ/g, '゜');
+							kana_el.value = kana1 + '　' + kana2 + '　' + kana3;
+							addr_el.value = data["results"][0].address1 + data["results"][0].address2 + data["results"][0].address3;
 						}
 					}).fail(function(xhr, t, err) {
 						console.log('Error:' + err);
@@ -2251,9 +2252,11 @@ outai_template.prototype = {
 
 			function zipAjax(dat) {
 				return $.ajax({
-					type: 'POST',
-					url: './scripts/zip.php',
-					data: dat
+					type: 'GET',
+					cache: false,
+					url: 'https://zipcloud.ibsnet.co.jp/api/search',
+					data: dat,
+					dataType: 'jsonp'
 				});
 			}
 		},
