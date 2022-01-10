@@ -155,7 +155,7 @@ div.form-group {
 	overflow-y: auto;
 	padding: 0;
 }
-#template > div.tab-content > div:firtst-child.tab-pane > div.panel > div.panel-body { padding: 15px; }
+#template > div.tab-content > div#help.tab-pane > div.panel > div.panel-body { padding: 15px; }
 .panel-body td { background-color: #fff; }
 .nav-stacked > li + li { margin-top: 0; }
 select[id^="select_supp"] + select { margin-top: 1em; }
