@@ -550,7 +550,7 @@ outai_template.prototype = {
 			logArr = logArr.reduce(function(acc, obj) {
 				var lastTitle = (acc.length > 0) ? acc[acc.length-1].title : '';
 				// 1個前の項目とタイトル被り無
-				if (lastTitle !==- obj.title) {
+				if (lastTitle !== obj.title) {
 					acc.push(obj);
 					return acc;
 				}
