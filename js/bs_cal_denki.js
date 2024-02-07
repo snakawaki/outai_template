@@ -58,7 +58,7 @@ EiRekiCal.prototype = {
 			this.nenn++;
 			this.tuki = 1;
 		}
-		// this.tukiの計算結果が0だったら
+		// this.tukiの計算結果が0だったら
 		if (this.tuki === 0) {
 			// 年を戻す
 			this.nenn--;
@@ -428,7 +428,7 @@ EiRekiCal.prototype = {
 			backDiv.style.backgroundColor = 'rgba(0, 0, 0, .2)';
 		document.body.appendChild(backDiv);
 
-		// #calBackdropクリックで彼ンター閉じる
+		// #calBackdropクリックでカレンダー閉じる
 		var self = this;
 		self.addListener(
 			document.getElementById('calBackdrop'),
@@ -670,7 +670,7 @@ holidays = {
 		shukujitsu[36] = [toshi, 12, 30].join(this.splitter);
 		shukujitsu[37] = [toshi, 12, 31].join(this.splitter);
 		shukujitsu[38] = [toshi, 1, 2].join(this.splitter);
-		shukujitsu[38] = [toshi, 1, 3].join(this.splitter);
+		shukujitsu[39] = [toshi, 1, 3].join(this.splitter);
 
 		/* ↑祝日の定義はここまで */
 

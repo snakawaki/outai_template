@@ -2,7 +2,7 @@
 
 div[id^=div_cal] {
 	font-family: "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",sans-serif;
-	width: 250px;
+	width: 270px;
 	height: auto;
 	position: fixed;
 	top: calc(50vh - 150px);
